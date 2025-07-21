@@ -64,7 +64,7 @@ src/
 ## 🧑‍💻 Author
 
 **Edwin C Shony**
-[Portfolio](https://edwincshony.vercel.app) • [GitHub](https://github.com/EdwinShony) • [LinkedIn](https://linkedin.com/in/edwincshony)
+[Portfolio](https://edwincshony.vercel.app) • [GitHub](https://github.com/edwincshony) • [LinkedIn](https://linkedin.com/in/edwincshony)
 
 ## 📄 License
 
