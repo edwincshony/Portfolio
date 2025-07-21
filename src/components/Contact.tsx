@@ -235,28 +235,6 @@ const Contact = () => {
             </Card>
 
 
-            <div className="text-center p-8 bg-primary/5 rounded-lg border border-primary/20">
-              <h4 className="text-lg font-semibold mb-2">Ready to work together?</h4>
-              <p className="text-muted-foreground mb-4">
-                I'm currently open to new opportunities and exciting projects
-              </p>
-              <Button 
-                asChild 
-                size="lg" 
-                className="bg-accent hover:bg-accent/90"
-              >
-                <a 
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  <Mail className="mr-2 h-4 w-4" />
-                  Let's Talk
-                </a>
-              </Button>
-            </div>
           </div>
         </div>
       </div>
