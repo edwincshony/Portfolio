@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
+# Personal Portfolio - Edwin C Shony
 
-## Project info
+## Project Info
 
-**URL**: https://lovable.dev/projects/82143bc1-41d4-4cdf-bb73-21baceb03531
+**Live URL**: [https://edwincshony.vercel.app](https://edwincshony.vercel.app)
 
-## How can I edit this code?
+## ✨ Getting Started
 
-There are several ways of editing your application.
+This project is a fully responsive developer portfolio built using modern web technologies. Follow the steps below to run it locally.
 
-**Use Lovable**
+### Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/82143bc1-41d4-4cdf-bb73-21baceb03531) and start prompting.
+Make sure you have the following installed:
 
-Changes made via Lovable will be committed automatically to this repo.
+* [Node.js & npm](https://nodejs.org/)
+* [Git](https://git-scm.com/)
 
-**Use your preferred IDE**
+### Setup
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+```bash
+# Step 1: Clone the repository
+git clone <YOUR_REPO_URL>
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
+# Step 2: Navigate to the project directory
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Step 3: Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## 🛠️ Built With
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+* **React**
+* **Vite**
+* **TypeScript**
+* **Tailwind CSS**
+* **shadcn/ui**
 
-**Use GitHub Codespaces**
+## 📦 Deployment
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+This project can be easily deployed using platforms like **Vercel**, **Netlify**, or any other static hosting service.
 
-## What technologies are used for this project?
+### Deploying with Vercel:
 
-This project is built with:
+1. Push your code to GitHub.
+2. Go to [vercel.com](https://vercel.com) and import your repository.
+3. Configure the project (if needed) and deploy.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📁 Folder Structure
 
-## How can I deploy this project?
+```
+src/
+├── components/       # Reusable UI components
+├── pages/            # Main route-based pages
+├── assets/           # Images and static assets
+├── lib/              # Utility and helper functions
+├── styles/           # Tailwind and custom styles
+└── main.tsx          # App entry point
+```
 
-Simply open [Lovable](https://lovable.dev/projects/82143bc1-41d4-4cdf-bb73-21baceb03531) and click on Share -> Publish.
+## 🧑‍💻 Author
 
-## Can I connect a custom domain to my Lovable project?
+**Edwin C Shony**
+[Portfolio](https://edwincshony.vercel.app) • [GitHub](https://github.com/EdwinShony) • [LinkedIn](https://linkedin.com/in/edwincshony)
 
-Yes, you can!
+## 📄 License
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is licensed under the MIT License. See the `LICENSE` file for details.
