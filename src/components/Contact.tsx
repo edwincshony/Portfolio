@@ -180,13 +180,14 @@ const Contact = () => {
                 </Button>
 
                 {/* Error handling */}
-                {state.errors && state.errors.length > 0 && (
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <p className="text-red-800 text-sm">
-                      There was an error sending your message. Please try again.
-                    </p>
-                  </div>
-                )}
+                {Array.isArray(state.errors) && state.errors.length > 0 && (
+  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+    <p className="text-red-800 text-sm">
+      There was an error sending your message. Please try again.
+    </p>
+  </div>
+)}
+
               </form>
             </CardContent>
           </Card>
