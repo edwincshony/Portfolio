@@ -44,26 +44,31 @@ const Hero = () => {
           </p>
           
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <Button 
-              size="lg" 
-              variant="secondary"
-              className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-3"
-            >
-              <Download className="mr-2 h-5 w-5" />
-              Download Resume
-            </Button>
-            
-            <Button 
-              size="lg" 
-              variant="outline"
-              onClick={() => scrollToSection('projects')}
-              className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-3"
-            >
-              View Projects
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
+<div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+<a href="/resume.pdf" download="Edwin_C_Shony_Resume_BTech2025.pdf">
+  <Button 
+    size="lg" 
+    variant="secondary"
+    className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-3"
+  >
+    <Download className="mr-2 h-5 w-5" />
+    Download Resume
+  </Button>
+</a>
+
+
+
+  <Button 
+    size="lg" 
+    variant="secondary" // Match the same variant
+    onClick={() => scrollToSection('projects')}
+    className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-3"
+  >
+    View Projects
+    <ArrowRight className="ml-2 h-5 w-5" />
+  </Button>
+</div>
+
           
           {/* Social Links */}
           <div className="flex justify-center space-x-6">

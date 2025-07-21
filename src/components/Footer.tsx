@@ -87,14 +87,11 @@ const Footer = () => {
             </div>
 
             <div className="flex items-center text-background/80">
-              <span className="text-sm">
-                © {currentYear} Edwin C Shony. Made with
-              </span>
-              <Heart className="h-4 w-4 mx-1 text-red-400" />
-              <span className="text-sm">
-                and lots of coffee.
-              </span>
-            </div>
+  <span className="text-sm">
+    © {currentYear} Edwin C Shony
+  </span>
+</div>
+
           </div>
         </div>
 

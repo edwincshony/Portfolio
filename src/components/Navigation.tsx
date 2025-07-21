@@ -59,13 +59,14 @@ const Navigation = () => {
               </button>
             ))}
             
-            <Button 
-              size="sm" 
-              className="ml-4"
-            >
-              <Download className="mr-2 h-4 w-4" />
-              Resume
-            </Button>
+            <a href="/resume.pdf" download="Edwin_C_Shony_Resume_BTech2025.pdf">
+  <Button size="sm" className="ml-4">
+    <Download className="mr-2 h-4 w-4" />
+    Resume
+  </Button>
+</a>
+
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -94,10 +95,14 @@ const Navigation = () => {
               ))}
               
               <div className="pt-4 border-t border-border/50">
-                <Button size="sm" className="w-full">
-                  <Download className="mr-2 h-4 w-4" />
-                  Download Resume
-                </Button>
+              <a href="/resume.pdf" download="Edwin_C_Shony_Resume_BTech2025.pdf">
+  <Button size="sm" className="w-full">
+    <Download className="mr-2 h-4 w-4" />
+    Download Resume
+  </Button>
+</a>
+
+
               </div>
             </div>
           </div>

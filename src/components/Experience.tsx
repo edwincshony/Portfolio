@@ -7,10 +7,10 @@ const Experience = () => {
     {
       title: "Django Web Development Intern",
       company: "Ziuke Infotech",
-      location: "Remote",
-      duration: "January 2025 - Present",
+      location: "On-site",
+      duration: "January 2025 – March 2025",
       type: "Internship",
-      description: "Gaining hands-on experience in full-stack development while building innovative web applications that solve real-world problems.",
+      description: "Completed a 3-month internship focused on full-stack development, contributing to web applications that addressed real-world challenges in photography and agriculture.",
       achievements: [
         "Developed Snapfolio, an online photography portfolio creator with complete user management system",
         "Built Botanical Buddy, an interactive platform for plant enthusiasts with community features",
@@ -22,6 +22,7 @@ const Experience = () => {
       technologies: ["Django", "SQLite", "HTML", "CSS", "JavaScript", "Database Management", "Authentication Systems"]
     }
   ];
+  
 
   const education = [
     {

@@ -44,9 +44,7 @@ const About = () => {
             </p>
             
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              Currently working as a Django Web Development Intern at Ziuke Infotech, I've had the opportunity 
-              to build full-stack applications that solve real-world problems - from photography portfolio 
-              management to agricultural technology solutions.
+            Gained hands-on experience as a Django Web Development Intern at Ziuke Infotech, developing full-stack solutions for real-world problems like photography portfolio systems and agri-tech applications.
             </p>
             
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
