@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm, ValidationError } from "@formspree/react";
 import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
+import { toast } from "sonner"; // ✅ make sure 'sonner' is installed for toasts
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +15,7 @@ const Contact = () => {
     message: ""
   });
 
-  const [state, handleSubmit] = useForm("mvgqzddg");
+  const [state, handleSubmit] = useForm("mvgqzddg"); // ✅ Replace with your actual Formspree ID
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -22,6 +23,13 @@ const Contact = () => {
       [e.target.name]: e.target.value
     });
   };
+
+  useEffect(() => {
+    if (state.succeeded) {
+      toast.success("Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" });
+    }
+  }, [state.succeeded]);
 
   const contactInfo = [
     {
@@ -64,17 +72,6 @@ const Contact = () => {
       color: "hover:bg-green-50"
     }
   ];
-
-  if (state.succeeded) {
-    return (
-      <section id="contact" className="section-padding bg-section-background">
-        <div className="max-w-2xl mx-auto text-center p-12">
-          <h2 className="text-3xl font-semibold mb-4 text-green-600">Message sent!</h2>
-          <p className="text-muted-foreground">Thanks for reaching out. I’ll get back to you soon.</p>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="contact" className="section-padding bg-section-background">
@@ -155,9 +152,8 @@ const Contact = () => {
             </CardContent>
           </Card>
 
-          {/* Contact Information */}
+          {/* Contact Info & Social */}
           <div className="space-y-8">
-            {/* Contact Details */}
             <Card className="hover:shadow-lg transition-all duration-300">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-6">Get in touch</h3>
@@ -187,7 +183,6 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            {/* Social Links */}
             <Card className="hover:shadow-lg transition-all duration-300">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-6">Connect with me</h3>
@@ -209,7 +204,6 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            {/* Call to Action */}
             <div className="text-center p-8 bg-primary/5 rounded-lg border border-primary/20">
               <h4 className="text-lg font-semibold mb-2">Ready to work together?</h4>
               <p className="text-muted-foreground mb-4">
