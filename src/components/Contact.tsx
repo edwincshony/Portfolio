@@ -234,26 +234,6 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-6">Connect with me</h3>
-
-                <div className="grid grid-cols-1 gap-4">
-                  {socialLinks.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.href}
-                      target={link.href.startsWith('http') ? "_blank" : "_self"}
-                      rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
-                      className={`flex items-center p-4 rounded-lg border border-border/50 transition-all duration-300 ${link.color}`}
-                    >
-                      <link.icon className="h-5 w-5 mr-3" />
-                      <span className="font-medium">{link.label}</span>
-                    </a>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
 
             <div className="text-center p-8 bg-primary/5 rounded-lg border border-primary/20">
               <h4 className="text-lg font-semibold mb-2">Ready to work together?</h4>
