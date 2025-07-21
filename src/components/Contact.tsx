@@ -1,9 +1,10 @@
+"use client";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
+import { useForm, ValidationError } from "@formspree/react";
 import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
 
 const Contact = () => {
@@ -12,26 +13,8 @@ const Contact = () => {
     email: "",
     message: ""
   });
-  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Create mailto link with form data
-    const subject = `Message from ${formData.name}`;
-    const body = `Hello Edwin,\n\n${formData.message}\n\nBest regards,\n${formData.name}\n${formData.email}`;
-    const mailtoLink = `mailto:edwincshony123@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    window.open(mailtoLink);
-    
-    toast({
-      title: "Email client opened!",
-      description: "Your default email client should open with the message pre-filled.",
-    });
-    
-    // Reset form
-    setFormData({ name: "", email: "", message: "" });
-  };
+  const [state, handleSubmit] = useForm("mvgqzddg");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -70,7 +53,7 @@ const Contact = () => {
     },
     {
       icon: Linkedin,
-      label: "LinkedIn", 
+      label: "LinkedIn",
       href: "https://www.linkedin.com/in/edwincshony/",
       color: "hover:bg-blue-50"
     },
@@ -81,6 +64,17 @@ const Contact = () => {
       color: "hover:bg-green-50"
     }
   ];
+
+  if (state.succeeded) {
+    return (
+      <section id="contact" className="section-padding bg-section-background">
+        <div className="max-w-2xl mx-auto text-center p-12">
+          <h2 className="text-3xl font-semibold mb-4 text-green-600">Message sent!</h2>
+          <p className="text-muted-foreground">Thanks for reaching out. I’ll get back to you soon.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="contact" className="section-padding bg-section-background">
@@ -101,7 +95,7 @@ const Contact = () => {
           <Card className="hover:shadow-lg transition-all duration-300">
             <CardContent className="p-8">
               <h3 className="text-2xl font-semibold mb-6">Send me a message</h3>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -118,7 +112,7 @@ const Contact = () => {
                     className="w-full"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
                     Email Address
@@ -133,8 +127,9 @@ const Contact = () => {
                     placeholder="your.email@example.com"
                     className="w-full"
                   />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
                     Message
@@ -149,11 +144,12 @@ const Contact = () => {
                     rows={5}
                     className="w-full resize-none"
                   />
+                  <ValidationError prefix="Message" field="message" errors={state.errors} />
                 </div>
-                
-                <Button type="submit" className="w-full" size="lg">
+
+                <Button type="submit" className="w-full" size="lg" disabled={state.submitting}>
                   <Send className="mr-2 h-4 w-4" />
-                  Send Message
+                  {state.submitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </CardContent>
@@ -165,7 +161,7 @@ const Contact = () => {
             <Card className="hover:shadow-lg transition-all duration-300">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-6">Get in touch</h3>
-                
+
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
                     <div key={index} className="flex items-center">
@@ -175,7 +171,7 @@ const Contact = () => {
                       <div>
                         <p className="text-sm text-muted-foreground">{info.label}</p>
                         {info.href ? (
-                          <a 
+                          <a
                             href={info.href}
                             className="text-foreground hover:text-primary transition-colors"
                           >
@@ -195,7 +191,7 @@ const Contact = () => {
             <Card className="hover:shadow-lg transition-all duration-300">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold mb-6">Connect with me</h3>
-                
+
                 <div className="grid grid-cols-1 gap-4">
                   {socialLinks.map((link, index) => (
                     <a
