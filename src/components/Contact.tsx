@@ -5,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm, ValidationError } from "@formspree/react";
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
-import { toast } from "sonner"; // ✅ make sure 'sonner' is installed for toasts
+import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,8 +13,10 @@ const Contact = () => {
     email: "",
     message: ""
   });
+  
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const [state, handleSubmit] = useForm("mvgqzddg"); // ✅ Replace with your actual Formspree ID
+  const [state, handleSubmit] = useForm("mvgqzddg"); // Replace with your actual Formspree ID
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -24,10 +25,20 @@ const Contact = () => {
     });
   };
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await handleSubmit(e);
+  };
+
   useEffect(() => {
     if (state.succeeded) {
-      toast.success("Message sent successfully!");
+      setShowSuccess(true);
       setFormData({ name: "", email: "", message: "" });
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
     }
   }, [state.succeeded]);
 
@@ -68,7 +79,7 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      href: "mailto:edwincshony123@gmail.com",
+      href: "#contact", // Changed to prevent opening email client
       color: "hover:bg-green-50"
     }
   ];
@@ -93,7 +104,18 @@ const Contact = () => {
             <CardContent className="p-8">
               <h3 className="text-2xl font-semibold mb-6">Send me a message</h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Success Message */}
+              {showSuccess && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center">
+                  <CheckCircle className="h-5 w-5 text-green-600 mr-3" />
+                  <div>
+                    <h4 className="text-green-800 font-medium">Message sent successfully!</h4>
+                    <p className="text-green-700 text-sm">Thank you for reaching out. I'll get back to you soon.</p>
+                  </div>
+                </div>
+              )}
+
+              <form onSubmit={onSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Your Name
@@ -107,6 +129,7 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="Enter your full name"
                     className="w-full"
+                    disabled={state.submitting}
                   />
                 </div>
 
@@ -123,6 +146,7 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="your.email@example.com"
                     className="w-full"
+                    disabled={state.submitting}
                   />
                   <ValidationError prefix="Email" field="email" errors={state.errors} />
                 </div>
@@ -140,14 +164,29 @@ const Contact = () => {
                     placeholder="Tell me about your project, opportunity, or just say hello!"
                     rows={5}
                     className="w-full resize-none"
+                    disabled={state.submitting}
                   />
                   <ValidationError prefix="Message" field="message" errors={state.errors} />
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" disabled={state.submitting}>
+                <Button 
+                  type="submit" 
+                  className="w-full" 
+                  size="lg" 
+                  disabled={state.submitting}
+                >
                   <Send className="mr-2 h-4 w-4" />
                   {state.submitting ? "Sending..." : "Send Message"}
                 </Button>
+
+                {/* Error handling */}
+                {state.errors && state.errors.length > 0 && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-800 text-sm">
+                      There was an error sending your message. Please try again.
+                    </p>
+                  </div>
+                )}
               </form>
             </CardContent>
           </Card>
@@ -192,8 +231,8 @@ const Contact = () => {
                     <a
                       key={index}
                       href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target={link.href.startsWith('http') ? "_blank" : "_self"}
+                      rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
                       className={`flex items-center p-4 rounded-lg border border-border/50 transition-all duration-300 ${link.color}`}
                     >
                       <link.icon className="h-5 w-5 mr-3" />
@@ -209,8 +248,13 @@ const Contact = () => {
               <p className="text-muted-foreground mb-4">
                 I'm currently open to new opportunities and exciting projects
               </p>
-              <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
-                <a href="mailto:edwincshony123@gmail.com">
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-accent hover:bg-accent/90"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <a href="#contact">
                   <Mail className="mr-2 h-4 w-4" />
                   Let's Talk
                 </a>
