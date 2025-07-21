@@ -26,7 +26,7 @@ const Projects = () => {
       color: "bg-purple-50 border-purple-200"
     },
     {
-      title: "Botanical Buddy", 
+      title: "Plant-Pal", 
       subtitle: "Interactive Plant Community Platform",
       description: "An interactive space for plant lovers and botanists featuring community-driven discussions, personalized plant care guides, and real-time expert consultations. This project deepened my understanding of user engagement and structured data management.",
       image: botanicalBuddyMockup,
@@ -43,7 +43,7 @@ const Projects = () => {
       color: "bg-green-50 border-green-200"
     },
     {
-      title: "Crop Guardian",
+      title: "SecureCrop",
       subtitle: "Modern Agriculture Technology Platform", 
       description: "A game-changer for modern agriculture designed to help farmers with pest & weed databases, customized control measures, and real-time alerts. This project enhanced my ability to work with data-driven recommendations and analytical insights.",
       image: cropGuardianMockup,
