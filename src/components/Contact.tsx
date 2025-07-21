@@ -27,7 +27,16 @@ const Contact = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await handleSubmit(e);
+    
+    // Create FormData object for Formspree
+    const form = e.target as HTMLFormElement;
+    const formDataObj = new FormData(form);
+    
+    try {
+      await handleSubmit(formDataObj);
+    } catch (error) {
+      console.error('Form submission error:', error);
+    }
   };
 
   useEffect(() => {
@@ -36,9 +45,12 @@ const Contact = () => {
       setFormData({ name: "", email: "", message: "" });
       
       // Hide success message after 5 seconds
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setShowSuccess(false);
       }, 5000);
+      
+      // Cleanup timer on unmount
+      return () => clearTimeout(timer);
     }
   }, [state.succeeded]);
 
@@ -180,14 +192,13 @@ const Contact = () => {
                 </Button>
 
                 {/* Error handling */}
-                {Array.isArray(state.errors) && state.errors.length > 0 && (
-  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-    <p className="text-red-800 text-sm">
-      There was an error sending your message. Please try again.
-    </p>
-  </div>
-)}
-
+                {state.errors && state.errors.length > 0 && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-800 text-sm">
+                      There was an error sending your message. Please try again.
+                    </p>
+                  </div>
+                )}
               </form>
             </CardContent>
           </Card>
@@ -253,9 +264,14 @@ const Contact = () => {
                 asChild 
                 size="lg" 
                 className="bg-accent hover:bg-accent/90"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                <a href="#contact">
+                <a 
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
                   <Mail className="mr-2 h-4 w-4" />
                   Let's Talk
                 </a>
