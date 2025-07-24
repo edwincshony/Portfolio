@@ -61,38 +61,6 @@ const Projects = () => {
     }
   ];
 
-  // Professional error handling and mobile-optimized link opening
-  const handleGitHubClick = (url, projectTitle) => {
-    try {
-      // Validate URL before opening
-      if (!url || typeof url !== 'string') {
-        console.error('Invalid GitHub URL provided');
-        return;
-      }
-
-      // Ensure URL is properly formatted
-      const validUrl = url.startsWith('http') ? url : `https://${url}`;
-      
-      // Mobile-optimized link opening with fallback
-      if (typeof window !== 'undefined') {
-        // Try opening in new tab/window
-        const newWindow = window.open(validUrl, '_blank', 'noopener,noreferrer');
-        
-        // Fallback for mobile browsers that block popups
-        if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-          // Alternative approach for mobile - direct navigation
-          window.location.href = validUrl;
-        }
-      }
-    } catch (error) {
-      console.error('Error opening GitHub link:', error);
-      // Final fallback - try direct navigation
-      if (typeof window !== 'undefined') {
-        window.location.href = url;
-      }
-    }
-  };
-
   return (
     <section id="projects" className="section-padding bg-section-background">
       <div className="max-w-7xl mx-auto">
@@ -118,7 +86,6 @@ const Projects = () => {
                       src={project.image} 
                       alt={`${project.title} mockup`}
                       className="w-full h-64 lg:h-full object-cover hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent lg:hidden"></div>
                   </div>
@@ -165,30 +132,13 @@ const Projects = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      {/* GitHub Button with enhanced mobile compatibility */}
-                      <Button 
-                        onClick={() => handleGitHubClick(project.githubUrl, project.title)}
-                        className="flex-1 sm:flex-none touch-manipulation"
-                        type="button"
-                      >
-                        <Github className="mr-2 h-4 w-4" />
-                        View on GitHub
+                    <div className="flex gap-4">
+                      <Button asChild className="flex-1 sm:flex-none">
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                          <Github className="mr-2 h-4 w-4" />
+                          View on GitHub
+                        </a>
                       </Button>
-                      
-                      {/* Alternative direct link for maximum compatibility */}
-                      <a 
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="sm:hidden"
-                        aria-label={`View ${project.title} on GitHub`}
-                      >
-                        <Button variant="outline" className="w-full touch-manipulation">
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          Direct Link
-                        </Button>
-                      </a>
                     </div>
                   </div>
                 </div>
