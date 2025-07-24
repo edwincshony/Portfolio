@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github, Camera, Leaf, Shield } from "lucide-react";
+import { Github, ExternalLink, Camera, Leaf, Shield } from "lucide-react";
 import snapfolioMockup from "@/assets/snapfolio-mockup.jpg";
 import botanicalBuddyMockup from "@/assets/botanical-buddy-mockup.jpg";
 import cropGuardianMockup from "@/assets/crop-guardian-mockup.jpg";
@@ -11,13 +11,13 @@ const Projects = () => {
     {
       title: "Snapfolio",
       subtitle: "Online Photography Portfolio Creator",
-      description: "A feature-rich platform enabling photographers to showcase their work, manage portfolios, interact with clients, and handle bookings seamlessly.",
+      description: "A feature-rich platform enabling photographers to showcase their work, manage portfolios, interact with clients, and handle bookings seamlessly. From portfolio monitoring to client reviews, this project honed my skills in user management and dynamic content handling.",
       image: snapfolioMockup,
       icon: Camera,
       technologies: ["Django", "SQLite", "HTML", "CSS", "JavaScript"],
       keyFeatures: [
         "Portfolio Management System",
-        "Client Interaction Platform",
+        "Client Interaction Platform", 
         "Booking & Scheduling",
         "Review & Rating System",
         "User Authentication & Profiles"
@@ -26,16 +26,16 @@ const Projects = () => {
       color: "bg-purple-50 border-purple-200"
     },
     {
-      title: "Plant-Pal",
+      title: "Plant-Pal", 
       subtitle: "Interactive Plant Community Platform",
-      description: "An interactive space for plant lovers and botanists featuring community-driven discussions, personalized plant care guides, and real-time expert consultations.",
+      description: "An interactive space for plant lovers and botanists featuring community-driven discussions, personalized plant care guides, and real-time expert consultations. This project deepened my understanding of user engagement and structured data management.",
       image: botanicalBuddyMockup,
       icon: Leaf,
       technologies: ["Django", "SQLite", "HTML", "CSS", "JavaScript"],
       keyFeatures: [
         "Community Discussion Forums",
         "Personalized Plant Care Guides",
-        "Real-time Expert Consultations",
+        "Real-time Expert Consultations", 
         "Plant Database Management",
         "User Profile & Preferences"
       ],
@@ -44,8 +44,8 @@ const Projects = () => {
     },
     {
       title: "SecureCrop",
-      subtitle: "Modern Agriculture Technology Platform",
-      description: "Designed to help farmers with pest & weed databases, customized control measures, and real-time alerts.",
+      subtitle: "Modern Agriculture Technology Platform", 
+      description: "A game-changer for modern agriculture designed to help farmers with pest & weed databases, customized control measures, and real-time alerts. This project enhanced my ability to work with data-driven recommendations and analytical insights.",
       image: cropGuardianMockup,
       icon: Shield,
       technologies: ["Django", "SQLite", "HTML", "CSS", "JavaScript"],
@@ -61,6 +61,38 @@ const Projects = () => {
     }
   ];
 
+  // Professional error handling and mobile-optimized link opening
+  const handleGitHubClick = (url, projectTitle) => {
+    try {
+      // Validate URL before opening
+      if (!url || typeof url !== 'string') {
+        console.error('Invalid GitHub URL provided');
+        return;
+      }
+
+      // Ensure URL is properly formatted
+      const validUrl = url.startsWith('http') ? url : `https://${url}`;
+      
+      // Mobile-optimized link opening with fallback
+      if (typeof window !== 'undefined') {
+        // Try opening in new tab/window
+        const newWindow = window.open(validUrl, '_blank', 'noopener,noreferrer');
+        
+        // Fallback for mobile browsers that block popups
+        if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+          // Alternative approach for mobile - direct navigation
+          window.location.href = validUrl;
+        }
+      }
+    } catch (error) {
+      console.error('Error opening GitHub link:', error);
+      // Final fallback - try direct navigation
+      if (typeof window !== 'undefined') {
+        window.location.href = url;
+      }
+    }
+  };
+
   return (
     <section id="projects" className="section-padding bg-section-background">
       <div className="max-w-7xl mx-auto">
@@ -71,7 +103,7 @@ const Projects = () => {
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             A showcase of my recent work in full-stack development, demonstrating my skills in 
-            building user-centric applications that solve real-world problems.
+            building user-centric applications that solve real-world problems
           </p>
         </div>
 
@@ -86,6 +118,7 @@ const Projects = () => {
                       src={project.image} 
                       alt={`${project.title} mockup`}
                       className="w-full h-64 lg:h-full object-cover hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent lg:hidden"></div>
                   </div>
@@ -131,21 +164,31 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    {/* GitHub Button */}
-                    <div className="flex flex-col gap-2">
-                      <Button asChild className="w-full sm:w-auto">
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Github className="mr-2 h-4 w-4" />
-                          View on GitHub
-                        </a>
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      {/* GitHub Button with enhanced mobile compatibility */}
+                      <Button 
+                        onClick={() => handleGitHubClick(project.githubUrl, project.title)}
+                        className="flex-1 sm:flex-none touch-manipulation"
+                        type="button"
+                      >
+                        <Github className="mr-2 h-4 w-4" />
+                        View on GitHub
                       </Button>
-                      <p className="text-xs text-muted-foreground sm:hidden">
-                        If it shows a 404, please open the link in your mobile browser manually.
-                      </p>
+                      
+                      {/* Alternative direct link for maximum compatibility */}
+                      <a 
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="sm:hidden"
+                        aria-label={`View ${project.title} on GitHub`}
+                      >
+                        <Button variant="outline" className="w-full touch-manipulation">
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          Direct Link
+                        </Button>
+                      </a>
                     </div>
                   </div>
                 </div>
