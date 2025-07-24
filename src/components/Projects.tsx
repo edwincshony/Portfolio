@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink, Camera, Leaf, Shield } from "lucide-react";
+import { Github, Camera, Leaf, Shield } from "lucide-react";
 import snapfolioMockup from "@/assets/snapfolio-mockup.jpg";
 import botanicalBuddyMockup from "@/assets/botanical-buddy-mockup.jpg";
 import cropGuardianMockup from "@/assets/crop-guardian-mockup.jpg";
@@ -11,13 +11,13 @@ const Projects = () => {
     {
       title: "Snapfolio",
       subtitle: "Online Photography Portfolio Creator",
-      description: "A feature-rich platform enabling photographers to showcase their work, manage portfolios, interact with clients, and handle bookings seamlessly. From portfolio monitoring to client reviews, this project honed my skills in user management and dynamic content handling.",
+      description: "A feature-rich platform enabling photographers to showcase their work, manage portfolios, interact with clients, and handle bookings seamlessly.",
       image: snapfolioMockup,
       icon: Camera,
       technologies: ["Django", "SQLite", "HTML", "CSS", "JavaScript"],
       keyFeatures: [
         "Portfolio Management System",
-        "Client Interaction Platform", 
+        "Client Interaction Platform",
         "Booking & Scheduling",
         "Review & Rating System",
         "User Authentication & Profiles"
@@ -26,16 +26,16 @@ const Projects = () => {
       color: "bg-purple-50 border-purple-200"
     },
     {
-      title: "Plant-Pal", 
+      title: "Plant-Pal",
       subtitle: "Interactive Plant Community Platform",
-      description: "An interactive space for plant lovers and botanists featuring community-driven discussions, personalized plant care guides, and real-time expert consultations. This project deepened my understanding of user engagement and structured data management.",
+      description: "An interactive space for plant lovers and botanists featuring community-driven discussions, personalized plant care guides, and real-time expert consultations.",
       image: botanicalBuddyMockup,
       icon: Leaf,
       technologies: ["Django", "SQLite", "HTML", "CSS", "JavaScript"],
       keyFeatures: [
         "Community Discussion Forums",
         "Personalized Plant Care Guides",
-        "Real-time Expert Consultations", 
+        "Real-time Expert Consultations",
         "Plant Database Management",
         "User Profile & Preferences"
       ],
@@ -44,8 +44,8 @@ const Projects = () => {
     },
     {
       title: "SecureCrop",
-      subtitle: "Modern Agriculture Technology Platform", 
-      description: "A game-changer for modern agriculture designed to help farmers with pest & weed databases, customized control measures, and real-time alerts. This project enhanced my ability to work with data-driven recommendations and analytical insights.",
+      subtitle: "Modern Agriculture Technology Platform",
+      description: "Designed to help farmers with pest & weed databases, customized control measures, and real-time alerts.",
       image: cropGuardianMockup,
       icon: Shield,
       technologies: ["Django", "SQLite", "HTML", "CSS", "JavaScript"],
@@ -71,7 +71,7 @@ const Projects = () => {
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             A showcase of my recent work in full-stack development, demonstrating my skills in 
-            building user-centric applications that solve real-world problems
+            building user-centric applications that solve real-world problems.
           </p>
         </div>
 
@@ -131,14 +131,21 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex gap-4">
-                      <Button asChild className="flex-1 sm:flex-none">
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                    {/* GitHub Button */}
+                    <div className="flex flex-col gap-2">
+                      <Button asChild className="w-full sm:w-auto">
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <Github className="mr-2 h-4 w-4" />
                           View on GitHub
                         </a>
                       </Button>
+                      <p className="text-xs text-muted-foreground sm:hidden">
+                        If it shows a 404, please open the link in your mobile browser manually.
+                      </p>
                     </div>
                   </div>
                 </div>
